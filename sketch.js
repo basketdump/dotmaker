@@ -25,6 +25,8 @@ function mouseClicked() {
     currentShape = new Circle(mouseX, mouseY, tmp.size, [random(0, 255), random(0, 255), random(0, 255)]);
   } else if (tmp.type == 1) {
     currentShape = new Square(mouseX, mouseY, tmp.size, [random(0, 255), random(0, 255), random(0, 255)]);
+  } else if (tmp.type === 2) {
+    currentShape = new Triangle(mouseX, mouseY, tmp.size, [random(0, 255), random(0, 255), random(0, 255)]);
   }
   else {
     currentShape = new Circle(mouseX, mouseY, 50, [random(0, 255), random(0, 255), random(0, 255)]);
