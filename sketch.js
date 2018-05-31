@@ -1,9 +1,11 @@
 var circles;
+var currentCircle;
 function setup() {
   // put setup code here
   createCanvas(1280, 720, "WebGL");
   // noCursor();
   circles = []
+  currentCircle = new Circle(mouseX, mouseY, 50, [random(0, 255), random(0, 255), random(0, 255)]);
 }
 
 function draw() {
@@ -12,15 +14,18 @@ function draw() {
   for (var i = 0; i < circles.length; i++) {
     circles[i].draw();
   }
+  currentCircle.move(mouseX, mouseY);
+  currentCircle.draw();
 }
 
 function mouseClicked() {
-  circles.push(new Circle(mouseX, mouseY, 50, [random(0, 255), random(0, 255), random(0, 255)]));
+  circles.push(currentCircle);
+  currentCircle = new Circle(mouseX, mouseY, 50, [random(0, 255), random(0, 255), random(0, 255)]);
 }
 
 function keyTyped() {
   if (key === 'z') {
-    circles.pop();
+    currentCircle = circles.pop();
   }
 }
 
@@ -35,5 +40,10 @@ class Circle {
   draw() {
     fill(this.rgb[0], this.rgb[1], this.rgb[2]);
     ellipse(this.x, this.y, this.size, this.size);
+  }
+
+  move(x, y) {
+    this.x = x;
+    this.y = y;
   }
 }
