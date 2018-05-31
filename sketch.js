@@ -36,10 +36,12 @@ function keyTyped() {
     currentShape = shapes.pop();
   } else if (key === 'x') {
     tmp = currentShape;
-    if (tmp.type === 1) {
-      currentShape = new Circle(tmp.x, tmp.y, tmp.size, tmp.rgb);
-    } else {
-      currentShape = new Square(tmp.x, tmp.y, tmp.size, tmp.rgb);
+    if (tmp.type === 2) {
+      currentShape = new Circle(mouseX, mouseY, tmp.size, tmp.rgb);
+    } else if (tmp.type === 0) {
+      currentShape = new Square(mouseX, mouseY, tmp.size, tmp.rgb);
+    } else if (tmp.type === 1) {
+      currentShape = new Triangle(mouseX, mouseY, tmp.size, tmp.rgb);
     }
   }
 }
@@ -100,5 +102,14 @@ class Square extends Entity {
 }
 
 class Triangle extends Entity {
-  
+  constructor(x, y, size, rgb) {
+    super(x, y, 2);
+    this.size = size;
+    this.rgb = rgb;
+  }
+
+  draw() {
+    fill(this.rgb[0], this.rgb[1], this.rgb[2])
+    triangle(this.x - this.size / 2, this.y + this.size / 2, this.x, this.y - this.size / 2, this.x + this.size / 2, this.y + this.size / 2);
+  }
 }
