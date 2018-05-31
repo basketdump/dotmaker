@@ -3,7 +3,6 @@ var currentShape;
 function setup() {
   // put setup code here
   createCanvas(1280, 720, "WebGL");
-  // noCursor();
   shapes = []
   currentShape = new Circle(mouseX, mouseY, 50, [random(0, 255), random(0, 255), random(0, 255)]);
   currentType = 0;
