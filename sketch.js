@@ -14,7 +14,7 @@ function draw() {
   for (var i = 0; i < shapes.length; i++) {
     shapes[i].draw();
   }
-  currentShape.move(lerp(currentShape.x, mouseX, 0.1), lerp(currentShape.y, mouseY, 0.1));
+  currentShape.move(mouseX, mouseY);
   currentShape.draw();
 }
 
@@ -36,7 +36,7 @@ function keyTyped() {
     currentShape = shapes.pop();
   } else if (key === 'x') {
     tmp = currentShape;
-    if (tmp.type == 1) {
+    if (tmp.type === 1) {
       currentShape = new Circle(tmp.x, tmp.y, tmp.size, tmp.rgb);
     } else {
       currentShape = new Square(tmp.x, tmp.y, tmp.size, tmp.rgb);
@@ -63,8 +63,8 @@ class Entity {
   }
 
 move(x, y) {
-  this.x = x;
-  this.y = y;
+  this.x = lerp(this.x, x, 0.1);
+  this.y = lerp(this.y, y, 0.1);
   }
 }
 
@@ -94,8 +94,8 @@ class Square extends Entity {
   }
 
   move(x, y) {
-    this.x = x - this.size / 2;
-    this.y = y - this.size / 2;
+    this.x = lerp(this.x, x - this.size / 2, 0.1);
+    this.y = lerp(this.y, y - this.size / 2, 0.1);
   }
 }
 
