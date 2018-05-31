@@ -24,7 +24,7 @@ function mouseClicked() {
 }
 
 function keyTyped() {
-  if (key === 'z') {
+  if (key === 'z' && circles.length > 0) {
     currentCircle = circles.pop();
   }
 }
