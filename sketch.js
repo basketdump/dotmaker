@@ -22,10 +22,13 @@ function draw() {
 function mouseClicked() {
   shapes.push(currentShape);
   var tmp = currentShape;
-  if (temp.type === 1 || currentShape.type === undefined) {
+  if (tmp.type === 0) {
+    currentShape = new Circle(mouseX, mouseY, tmp.size, [random(0, 255), random(0, 255), random(0, 255)]);
+  } else if (tmp.type == 1) {
+    currentShape = new Square(mouseX, mouseY, tmp.size, [random(0, 255), random(0, 255), random(0, 255)]);
+  }
+  else {
     currentShape = new Circle(mouseX, mouseY, 50, [random(0, 255), random(0, 255), random(0, 255)]);
-  } else {
-    currentShape = new Square(mouseX, mouseY, 50, [random(0, 255), random(0, 255), random(0, 255)]);
   }
 }
 
@@ -33,12 +36,20 @@ function keyTyped() {
   if (key === 'z' && shapes.length > 0) {
     currentShape = shapes.pop();
   } else if (key === 'x') {
-    temp = currentShape;
-    if (temp.type == 1) {
-      currentShape = new Circle(temp.x, temp.y, temp.size, temp.rgb);
+    tmp = currentShape;
+    if (tmp.type == 1) {
+      currentShape = new Circle(tmp.x, tmp.y, tmp.size, tmp.rgb);
     } else {
-      currentShape = new Square(temp.x, temp.y, temp.size, temp.rgb);
+      currentShape = new Square(tmp.x, tmp.y, tmp.size, tmp.rgb);
     }
+  }
+}
+
+function keyPressed() {
+  if (keyCode === UP_ARROW) {
+    currentShape.size += 5;
+  } else if (keyCode === DOWN_ARROW) {
+    currentShape.size -= 5;
   }
 }
 
