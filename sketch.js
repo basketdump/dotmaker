@@ -14,7 +14,7 @@ function draw() {
   for (var i = 0; i < shapes.length; i++) {
     shapes[i].draw();
   }
-  currentShape.move(mouseX, mouseY);
+  currentShape.move(lerp(currentShape.x, mouseX, 0.1), lerp(currentShape.y, mouseY, 0.1));
   currentShape.draw();
 }
 
